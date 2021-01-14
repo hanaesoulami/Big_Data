@@ -1,3 +1,8 @@
+import findspark
+findspark.init("")
+import pyspark 
+findspark.find()
+
 # importation des librairies
 import numpy as np
 import math
@@ -42,28 +47,33 @@ def pi_estimator_numpy(n):
 
 
 # initialisation de n   
-n=100000
+n=1000000
 
 #execution de la fonction spark et mesure du temps d'éxecution
-tempDebut=time.time()
+tempDebut=time()
 estimateur_pi_spark=pi_estimator_spark(n)
-tempFin=time.time()
+tempFin=time()
 
 #Temps d'éxecution avec spark
 temp_spark=tempFin-tempDebut
 
+
+print('n=',n)
  #affichage temps exécution et valeur d'estimation de pi
 print("Temps d'execution avec Spark :", temp_spark)
 print("La valeur approchée de Pi avec spark est:",estimateur_pi_spark)
+print("L'erreur est:",np.abs(math.pi - estimateur_pi_spark))
 
 #execution de la fonction spark et mesure du temps d'éxecution
-tempDebut=time.time()
+tempDebut=time()
 estimateur_pi_numpy=pi_estimator_numpy(n)
-tempFin=time.time()
+tempFin=time()
 
 #Temps d'éxecution avec spark
 temp_numpy=tempFin-tempDebut
 
  #affichage temps exécution et valeur d'estimation de pi
-print("Temps d'execution avec Spark :", temp_numpy)
-print("La valeur approchée de Pi avec spark est:",estimateur_pi_numpy)
+print("Temps d'execution avec numpy :", temp_numpy)
+print("La valeur approchée de Pi avec numpy est:",estimateur_pi_numpy)
+print("L'erreur est:",np.abs(math.pi - estimateur_pi_numpy))
+
